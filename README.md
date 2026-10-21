@@ -2,11 +2,11 @@
 Simple combobox, designed to work with remote sources.<br>
 
 Requirements:<br>
-jQuery 4, Bootstrap 5 (only css)<br>
+jQuery 4, Bootstrap 5(only css), Underscore(for debounce)<br>
 Should work with jQuery 3.7.1 as well.<br>
 
 Use "dist/atAutocomplete.umd.min" and "dist/atAutocomplete.min.css".<br>
-Then in js code: atCombobox('name', 'http://api_url', 300)<br>
+Then in js code: atAutocomplete('name', 'http://api_url', 300)<br>
 <br>
 1st param - id of hiddfen input element<br>
 2nd param - api url<br>
