@@ -1,5 +1,5 @@
-# Combobox
-Simple combobox, designed to work with remote sources.<br>
+# Autocomplete
+Simple Autocomplete, designed to work with remote sources.<br>
 
 Requirements:<br>
 jQuery 4, Bootstrap 5(only css), Underscore(for debounce)<br>
