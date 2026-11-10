@@ -34,7 +34,7 @@ export default function atAutocomplete(elId, url, delay = 300) {
         }
 
         $cb.html(
-            `<option value="${parseInt($el.data('id'))}" selected></option>`
+            `<option value="${parseInt($el.data('value'))}" selected></option>`
         );
 
         $el.addClass('selected');
@@ -64,7 +64,7 @@ export default function atAutocomplete(elId, url, delay = 300) {
                 .addClass('dropdown-item')
                 .attr({
                     role: 'option',
-                    'data-id': val.id,
+                    'data-value': val.value,
                     'data-idx': idx,
                     tabIndex: 0,
                     id: 'ac-option-' + idx,
@@ -83,8 +83,7 @@ export default function atAutocomplete(elId, url, delay = 300) {
         if (this !== $ddm[0]) $ddm.attr('hidden', true);
     })
 
-    $('.ac-container')
-        .on('click', `#${elId}-dropdown .dropdown-item`, function () {
+    $('.ac-container').on('click', `#${elId}-dropdown .dropdown-item`, function () {
         selectItem($(this));
     });
 
@@ -110,8 +109,7 @@ export default function atAutocomplete(elId, url, delay = 300) {
         }
     })
 
-    $('.ac-container')
-        .on('keyup', `#${elId}-dropdown .dropdown-item`, function (e) {
+    $('.ac-container').on('keyup', `#${elId}-dropdown .dropdown-item`, function (e) {
         if (e.key === 'ArrowDown') {
             const idx = parseInt($ddm.find('.dropdown-item:focus').data('idx'));
             if ($menuItems.length - 1 > idx) {
