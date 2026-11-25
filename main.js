@@ -55,7 +55,8 @@ export default function atAutocomplete(elId, url, delay = 300) {
         $selectedEl = null;
 
         if (data.length === 0) {
-            $ddm.html(`<div style="font-weight: 600;">Found nothing.</div>`);
+            $ddm.attr('hidden', false);
+            $ddm.html(`<div style="font-weight: 600;background-color:#fff" class="px-2">Found nothing.</div>`);
             return;
         }
 
@@ -92,8 +93,9 @@ export default function atAutocomplete(elId, url, delay = 300) {
         fetchData(url, { term: this.value }, handleApiData);
     });
 
-    $('.ac-container').on('keyup', `#${elId}-filter`, function (e) {
-        if (e.key === 'ArrowDown' && $menuItems.length) {
+    $('.ac-container').on('keydown', `#${elId}-filter`, function (e) {
+        if ((e.key === 'ArrowDown' || e.keyCode === 40) && $menuItems.length) {
+            e.preventDefault();
             $ddm.removeAttr('hidden');
             if ($selectedEl) {
                 const idx = parseInt($selectedEl.data('idx'));
@@ -109,8 +111,9 @@ export default function atAutocomplete(elId, url, delay = 300) {
         }
     })
 
-    $('.ac-container').on('keyup', `#${elId}-dropdown .dropdown-item`, function (e) {
-        if (e.key === 'ArrowDown') {
+    $('.ac-container').on('keydown', `#${elId}-dropdown`, function (e) {
+        if (e.key === 'ArrowDown' || e.keyCode === 40) {
+            e.preventDefault();
             const idx = parseInt($ddm.find('.dropdown-item:focus').data('idx'));
             if ($menuItems.length - 1 > idx) {
                 $menuItems.eq(idx + 1).trigger('focus')
@@ -120,7 +123,8 @@ export default function atAutocomplete(elId, url, delay = 300) {
                 $filter.attr('aria-activedescendant', 'ac-option-0');
             }
         }
-        if (e.key === 'ArrowUp') {
+        if (e.key === 'ArrowUp' || e.keyCode  === 38) {
+            e.preventDefault();
             const idx = parseInt($ddm.find('.dropdown-item:focus').data('idx'));
             if (idx > 0) {
                 $menuItems.eq(idx - 1).trigger('focus')
